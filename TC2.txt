@@ -1,0 +1,292 @@
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    Age INT,
+    City VARCHAR(30),
+    Email VARCHAR(50),
+    Phone VARCHAR(15)
+);
+
+INSERT INTO Customers (CustomerID, CustomerName, Age, City, Email, Phone) VALUES
+(1, 'Amit Sharma', 32, 'Pune', 'amit.sharma@email.com', '9876543210'),
+(2, 'Priya Singh', 28, 'Mumbai', 'priya.singh@email.com', '9123456780'),
+(3, 'Rahul Verma', 40, 'Delhi', 'rahul.verma@email.com', '9988776655'),
+(4, 'Sneha Patil', 36, 'Bangalore', 'sneha.patil@email.com', '9871234567'),
+(5, 'Karan Gupta', 30, 'Chennai', 'karan.gupta@email.com', '9765432109'),
+(6, 'Meera Iyer', 45, 'Hyderabad', 'meera.iyer@email.com', '9654321876'),
+(7, 'Vikas Desai', 29, 'Pune', 'vikas.desai@email.com', '9856472310'),
+(8, 'Anjali Nair', 38, 'Kolkata', 'anjali.nair@email.com', '9785632140'),
+(9, 'Rohit Mehta', 50, 'Ahmedabad', 'rohit.mehta@email.com', '9645321780'),
+(10, 'Shalini Rao', 27, 'Jaipur', 'shalini.rao@email.com', '9756423198');
+
+
+
+
+
+
+-- Accounts Table
+CREATE TABLE Accounts (
+    AccountID INT PRIMARY KEY,
+    CustomerID INT,
+    AccountType VARCHAR(20),
+    Balance DECIMAL(12,2),
+    Branch VARCHAR(50),
+    OpenDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Accounts (AccountID, CustomerID, AccountType, Balance, Branch, OpenDate) VALUES
+(101, 1, 'Savings', 50000.00, 'Pune Branch', '2020-05-10'),
+(102, 2, 'Current', 120000.00, 'Mumbai Branch', '2019-03-15'),
+(103, 3, 'Savings', 75000.00, 'Delhi Branch', '2018-07-20'),
+(104, 1, 'Current', 200000.00, 'Pune Branch', '2021-01-05'),
+(105, 4, 'Savings', 30000.00, 'Bangalore Branch', '2020-09-12'),
+(106, 5, 'Fixed Deposit', 150000.00, 'Chennai Branch', '2019-12-01'),
+(107, 6, 'Savings', 90000.00, 'Hyderabad Branch', '2020-02-17'),
+(108, 7, 'Current', 50000.00, 'Pune Branch', '2021-04-21'),
+(109, 8, 'Savings', 45000.00, 'Kolkata Branch', '2022-06-30'),
+(110, 9, 'Fixed Deposit', 250000.00, 'Ahmedabad Branch', '2019-11-11'),
+(111, 3, 'Current', 110000.00, 'Delhi Branch', '2020-01-05'),
+(112, 2, 'Savings', 85000.00, 'Mumbai Branch', '2021-07-14'),
+(113, 10, 'Savings', 40000.00, 'Jaipur Branch', '2022-03-20'),
+(114, 8, 'Fixed Deposit', 180000.00, 'Kolkata Branch', '2018-10-22'),
+(115, 5, 'Current', 60000.00, 'Chennai Branch', '2021-08-05');
+
+
+-- Transactions Table
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY,
+    AccountID INT,
+    TransactionDate DATE,
+    TransactionType VARCHAR(20),
+    Amount DECIMAL(12,2),
+    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
+);
+
+INSERT INTO Transactions (TransactionID, AccountID, TransactionDate, TransactionType, Amount) VALUES
+(1001, 101, '2023-01-05', 'Deposit', 20000.00),
+(1002, 101, '2023-02-10', 'Withdrawal', 5000.00),
+(1003, 101, '2023-03-12', 'Deposit', 15000.00),
+(1004, 101, '2023-04-15', 'Withdrawal', 10000.00),
+(1005, 102, '2023-01-15', 'Deposit', 30000.00),
+(1006, 102, '2023-02-20', 'Deposit', 20000.00),
+(1007, 102, '2023-03-18', 'Withdrawal', 10000.00),
+(1008, 103, '2023-03-20', 'Deposit', 15000.00),
+(1009, 103, '2023-04-25', 'Withdrawal', 5000.00),
+(1010, 103, '2023-05-05', 'Deposit', 25000.00),
+(1011, 104, '2023-02-25', 'Withdrawal', 10000.00),
+(1012, 104, '2023-03-30', 'Deposit', 30000.00),
+(1013, 105, '2023-04-05', 'Deposit', 5000.00),
+(1014, 105, '2023-05-10', 'Withdrawal', 2000.00),
+(1015, 106, '2023-03-12', 'Deposit', 70000.00),
+(1016, 106, '2023-04-18', 'Withdrawal', 15000.00),
+(1017, 107, '2023-05-15', 'Withdrawal', 2000.00),
+(1018, 107, '2023-06-20', 'Deposit', 25000.00),
+(1019, 108, '2023-06-20', 'Deposit', 25000.00),
+(1020, 108, '2023-07-05', 'Withdrawal', 5000.00),
+(1021, 109, '2023-07-01', 'Deposit', 50000.00),
+(1022, 109, '2023-08-10', 'Withdrawal', 20000.00),
+(1023, 110, '2023-01-30', 'Withdrawal', 10000.00),
+(1024, 110, '2023-02-15', 'Deposit', 40000.00),
+(1025, 111, '2023-02-14', 'Deposit', 20000.00),
+(1026, 111, '2023-03-10', 'Withdrawal', 5000.00),
+(1027, 112, '2023-03-22', 'Deposit', 15000.00),
+(1028, 112, '2023-04-12', 'Deposit', 10000.00),
+(1029, 113, '2023-04-10', 'Withdrawal', 5000.00),
+(1030, 113, '2023-05-05', 'Deposit', 20000.00),
+(1031, 114, '2023-05-05', 'Deposit', 40000.00),
+(1032, 114, '2023-06-15', 'Withdrawal', 10000.00),
+(1033, 115, '2023-06-18', 'Withdrawal', 10000.00);
+
+#1. Display all customers along with their account details
+SELECT c.*, a.*
+FROM Customers c
+LEFT JOIN Accounts a
+ON c.CustomerID = a.CustomerID;
+
+#2. List customers and the number of accounts they hold
+
+SELECT c.CustomerID, c.CustomerName, COUNT(a.AccountID) AS Account_Count
+FROM Customers c
+LEFT JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+GROUP BY c.CustomerID, c.CustomerName;
+
+#3. Show customers who do not have any account
+
+
+SELECT c.*
+FROM Customers c
+LEFT JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE a.AccountID IS NULL;
+
+#4. Display all accounts including missing customer info
+
+
+SELECT a.*, c.CustomerName
+FROM Accounts a
+LEFT JOIN Customers c
+ON a.CustomerID = c.CustomerID;
+
+#5. List customers with total balance across accounts
+
+SELECT c.CustomerName, SUM(a.Balance) AS Total_Balance
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+GROUP BY c.CustomerName;
+
+#6. Show customers and their accounts where account type is “Savings”
+
+
+SELECT c.CustomerName, a.AccountID, a.Balance
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE a.AccountType = 'Savings';
+
+#7. Find customers who opened an account after 2021-01-01
+
+SELECT DISTINCT c.CustomerName
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE a.OpenDate > '2021-01-01';
+
+#8. Display accounts in Mumbai Branch along with customer names
+
+
+SELECT c.CustomerName, a.AccountID, a.Balance
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE a.Branch = 'Mumbai Branch';
+
+#9. Show all transactions along with account details
+
+
+SELECT t.*, a.AccountType, a.Branch
+FROM Transactions t
+JOIN Accounts a
+ON t.AccountID = a.AccountID;
+
+10. Display withdrawal transactions only
+
+(Transactions only)
+
+SELECT *
+FROM Transactions
+WHERE TransactionType = 'Withdrawal';
+
+#11. Find accounts that have no transactions
+
+
+SELECT a.*
+FROM Accounts a
+LEFT JOIN Transactions t
+ON a.AccountID = t.AccountID
+WHERE t.TransactionID IS NULL;
+
+#12. Display total deposits per account
+
+SELECT AccountID, SUM(Amount) AS Total_Deposits
+FROM Transactions
+WHERE TransactionType = 'Deposit'
+GROUP BY AccountID;
+
+#13. Show maximum transaction amount per account
+
+
+SELECT AccountID, MAX(Amount) AS Max_Amount
+FROM Transactions
+GROUP BY AccountID;
+
+#14. Find accounts with balance > 100,000 and list transactions
+
+SELECT a.AccountID, a.Balance, t.TransactionType, t.Amount
+FROM Accounts a
+JOIN Transactions t
+ON a.AccountID = t.AccountID
+WHERE a.Balance > 100000;
+
+#15. List transactions in Pune Branch along with account type
+
+SELECT t.TransactionID, t.TransactionType, t.Amount, a.AccountType
+FROM Transactions t
+JOIN Accounts a
+ON t.AccountID = a.AccountID
+WHERE a.Branch = 'Pune Branch';
+
+#16. Find accounts where total withdrawals exceed 50,000
+
+
+SELECT AccountID, SUM(Amount) AS Total_Withdrawals
+FROM Transactions
+WHERE TransactionType = 'Withdrawal'
+GROUP BY AccountID
+HAVING SUM(Amount) > 50000;
+
+#17. Show all transactions for each customer
+
+
+SELECT c.CustomerName, a.AccountID
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE a.AccountID IN (SELECT AccountID FROM Transactions);
+
+#18. Display customers who made deposits only
+
+
+SELECT DISTINCT c.CustomerName
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE a.AccountID IN (
+    SELECT AccountID
+    FROM Transactions
+    GROUP BY AccountID
+    HAVING SUM(CASE WHEN TransactionType = 'Withdrawal' THEN 1 ELSE 0 END) = 0
+);
+
+#19. Find customers older than 35 years who made any transaction
+
+
+SELECT DISTINCT c.CustomerName, c.Age
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE c.Age > 35
+AND a.AccountID IN (SELECT AccountID FROM Transactions);
+
+#20. List customers whose total transaction amount exceeds 100,000
+
+
+SELECT c.CustomerName
+FROM Customers c
+JOIN Accounts a
+ON c.CustomerID = a.CustomerID
+WHERE a.AccountID IN (
+    SELECT AccountID
+    FROM Transactions
+    GROUP BY AccountID
+    HAVING SUM(Amount) > 100000
+);
+
+#21. Display all customers with their last transaction date
+
+SELECT c.CustomerName,
+       (SELECT MAX(TransactionDate)
+        FROM Transactions t
+        WHERE t.AccountID = a.AccountID) AS Last_Transaction_Date
+FROM Customers c
+LEFT JOIN Accounts a
+ON c.CustomerID = a.CustomerID;
+
+
+
+
+
+
+
